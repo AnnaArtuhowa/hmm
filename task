@@ -1,0 +1,33 @@
+class Mark:
+    def __init__(self, subject, grade):
+        self.subject = subject
+        self.grade = grade
+
+    def __str__(self):
+        return f"{self.subject}: {self.grade}"
+
+    def update_grade(self, new_grade):
+        self.grade = new_grade
+
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.marks = []
+
+    def add_mark(self, subject, grade):
+        self.marks.append(Mark(subject, grade))
+
+    def remove_mark(self, subject):
+        self.marks = [mark for mark in self.marks if mark.subject != subject]
+
+    def edit_mark(self, subject, new_grade):
+        for mark in self.marks:
+            if mark.subject == subject:
+                mark.update_grade(new_grade)
+                break
+
+    def get_marks(self):
+        return [str(mark) for mark in self.marks]
+
+    def __str__(self):
+        return f"Student: {self.name}\nMarks: {', '.join(self.get_marks())}"
